@@ -1,21 +1,22 @@
 package com.example.myapp;
 
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cursor> {
 	
 	private static final String TAG = MainActivity.class.getSimpleName();
 	
@@ -39,10 +40,12 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "OnCreate");
 		setContentView(R.layout.activity_main);
 		
-		Cursor cursor = getContentResolver().query(CONTACT_URI, null, null,
-		        null, null);
+		/*Cursor cursor = getContentResolver().query(CONTACT_URI, null, null,
+		        null, null);*/
 		
-		startManagingCursor(cursor);
+		//startManagingCursor(cursor);
+		
+		getSupportLoaderManager().initLoader(0, null, this);
 		
 		Button addBtn = (Button) findViewById(R.id.add);
 		Button deleteBtn = (Button) findViewById(R.id.delete);
@@ -56,7 +59,7 @@ public class MainActivity extends Activity {
 		        cv.put(CONTACT_PHONE, "email 4");
 		        Uri newUri = getContentResolver().insert(CONTACT_URI, cv);
 		        Log.d(TAG, "insert, result Uri : " + newUri.toString());
-		        adapter.notifyDataSetChanged();
+		        //adapter.notifyDataSetChanged();
 			}
 		});
 		
@@ -66,7 +69,7 @@ public class MainActivity extends Activity {
 				Uri uri = ContentUris.withAppendedId(CONTACT_URI, 3);
 				int cnt = getContentResolver().delete(uri, null, null);
 				Log.d(TAG, "delete, count = " + cnt);
-				adapter.notifyDataSetChanged();
+				//adapter.notifyDataSetChanged();
 			}
 		});
 		
@@ -79,14 +82,14 @@ public class MainActivity extends Activity {
 		        Uri uri = ContentUris.withAppendedId(CONTACT_URI, 2);
 		        int cnt = getContentResolver().update(uri, cv, null, null);
 		        Log.d(TAG, "update, count = " + cnt);
-		        adapter.notifyDataSetChanged();
+		        //adapter.notifyDataSetChanged();
 			}
 		});
 		
-		String from[] = { "first_name", "phone" };
+		String from[] = { CONTACT_NAME, CONTACT_PHONE };
 		int to[] = { android.R.id.text1, android.R.id.text2 };
 		adapter = new SimpleCursorAdapter(this,
-				android.R.layout.simple_list_item_2, cursor, from, to);
+				android.R.layout.simple_list_item_2, null, from, to, 0);
 
 		ListView lvContact = (ListView) findViewById(R.id.contactsListView);
 		lvContact.setAdapter(adapter);
@@ -96,10 +99,24 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		String[] projection = { CONTACT_ID, CONTACT_NAME, CONTACT_PHONE };
+	    CursorLoader cursorLoader = new CursorLoader(this,
+	        CONTACT_URI, projection, null, null, null);
+	    return cursorLoader;
 	}
 
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+		 adapter.changeCursor(data);
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		 adapter.changeCursor(null);
+		
+	}
+
+	
 }
