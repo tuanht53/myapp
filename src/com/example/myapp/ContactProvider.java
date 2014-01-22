@@ -158,7 +158,6 @@ public class ContactProvider extends ContentProvider {
 
 	@Override
 	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

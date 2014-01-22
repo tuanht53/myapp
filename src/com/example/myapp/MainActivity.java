@@ -1,7 +1,12 @@
 package com.example.myapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +38,8 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 	      + AUTHORITY + "/" + CONTACT_PATH);
 	
 	SimpleCursorAdapter adapter;
+	private AlarmManager alarmMgr;
+	private PendingIntent alarmIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +51,21 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 		        null, null);*/
 		
 		//startManagingCursor(cursor);
+		Intent intentP = new Intent(this, UpdateService.class);
+		intentP.putExtra("name", "Steve Jobs");
+		alarmIntent = PendingIntent.getService(this, 0, intentP, 0);
+		alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
+		alarmMgr.setInexactRepeating(AlarmManager.RTC, 
+				System.currentTimeMillis() + 10000, 10000, alarmIntent);
+		
+		EnableReciever();
 		
 		getSupportLoaderManager().initLoader(0, null, this);
 		
 		Button addBtn = (Button) findViewById(R.id.add);
 		Button deleteBtn = (Button) findViewById(R.id.delete);
 		Button updateBtn = (Button) findViewById(R.id.update);
+		Button stopBtn = (Button) findViewById(R.id.stop);
 		
 		addBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -86,6 +102,16 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 			}
 		});
 		
+		stopBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DisableReciever();
+				if (alarmMgr!= null) {
+				    alarmMgr.cancel(alarmIntent);
+				}
+			}
+		});
+		
 		String from[] = { CONTACT_NAME, CONTACT_PHONE };
 		int to[] = { android.R.id.text1, android.R.id.text2 };
 		adapter = new SimpleCursorAdapter(this,
@@ -117,6 +143,23 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 		 adapter.changeCursor(null);
 		
 	}
+	
+	private void EnableReciever(){
+		ComponentName receiver = new ComponentName(this, SampleBootReceiver.class);
+		PackageManager pm = getPackageManager();
 
+		pm.setComponentEnabledSetting(receiver,
+		        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+		        PackageManager.DONT_KILL_APP);
+	}
+	
+	private void DisableReciever(){
+		ComponentName receiver = new ComponentName(this, SampleBootReceiver.class);
+		PackageManager pm = getPackageManager();
+
+		pm.setComponentEnabledSetting(receiver,
+		        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+		        PackageManager.DONT_KILL_APP);
+	}
 	
 }
