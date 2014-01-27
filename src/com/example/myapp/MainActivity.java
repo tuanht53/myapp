@@ -6,10 +6,12 @@ import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
@@ -38,27 +40,11 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 	      + AUTHORITY + "/" + CONTACT_PATH);
 	
 	SimpleCursorAdapter adapter;
-	private AlarmManager alarmMgr;
-	private PendingIntent alarmIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "OnCreate");
 		setContentView(R.layout.activity_main);
-		
-		/*Cursor cursor = getContentResolver().query(CONTACT_URI, null, null,
-		        null, null);*/
-		
-		//startManagingCursor(cursor);
-		Intent intentP = new Intent(this, UpdateService.class);
-		intentP.putExtra("name", "Steve Jobs");
-		alarmIntent = PendingIntent.getService(this, 0, intentP, 0);
-		alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
-		alarmMgr.setInexactRepeating(AlarmManager.RTC, 
-				System.currentTimeMillis() + 10000, 10000, alarmIntent);
-		
-		EnableReciever();
 		
 		getSupportLoaderManager().initLoader(0, null, this);
 		
@@ -105,10 +91,10 @@ public class MainActivity extends FragmentActivity implements LoaderCallbacks<Cu
 		stopBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DisableReciever();
+				/*DisableReciever();
 				if (alarmMgr!= null) {
 				    alarmMgr.cancel(alarmIntent);
-				}
+				}*/
 			}
 		});
 		

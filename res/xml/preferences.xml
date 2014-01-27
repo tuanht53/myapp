@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <PreferenceCategory
+        android:title="Синхронизация"
+        android:key="update">
+        
+        <SwitchPreference
+            android:title="Автообновление"
+            android:summaryOn="да"
+            android:summaryOff="нет"
+            android:key="pref_auto_update"
+        	android:defaultValue="true"/>
+       
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="Страна"
+        android:key="country">
+        
+        <ListPreference
+            android:title="Страна"
+            android:summary="Пока"
+            android:key="pref_countryList"
+            android:defaultValue="RU"  />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

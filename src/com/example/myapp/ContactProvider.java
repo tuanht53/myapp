@@ -64,7 +64,7 @@ public class ContactProvider extends ContentProvider {
 	      Log.d(TAG, "URI_CONTACTS");
 	      // если сортировка не указана, ставим свою - по имени
 	      if (TextUtils.isEmpty(sortOrder)) {
-	        sortOrder = CONTACT_NAME + " ASC";
+	        //sortOrder = CONTACT_NAME + " ASC";
 	      }
 	      break;
 	    case URI_CONTACTS_ID: // Uri с ID
