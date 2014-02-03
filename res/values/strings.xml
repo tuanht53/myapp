@@ -11,5 +11,18 @@
         <item>Настройки</item>
         
     </string-array>
+    
+    <string-array name="entries">
+        <item>Россия</item>
+        <item>Украина</item>
+        <item>Белоруссия</item>
+        <item>Казахстан</item>
+    </string-array>
+    <string-array name="entry_values">
+        <item>ru</item>
+        <item>ua</item>
+        <item>by</item>
+        <item>kz</item>
+    </string-array>
 
 </resources>

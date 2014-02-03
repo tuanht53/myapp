@@ -13,31 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    
-	    <Button 
-	        android:id="@+id/add"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="add"/>
-	    
-	    <Button 
-	        android:id="@+id/delete"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="delete"/>
-	    
-	    <Button 
-	        android:id="@+id/update"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="update"/>
-	    
-	     <Button 
-	        android:id="@+id/stop"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="stop"/>
-	    
+       
     </LinearLayout>
 
     <ListView

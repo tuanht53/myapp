@@ -15,11 +15,9 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
-import android.content.Context;
-
 public class Global {
 	
-	public static DefaultHttpClient getClient(Context context) {
+	public static DefaultHttpClient getClient() {
 		try {
 			KeyStore trustStore = KeyStore.getInstance(KeyStore
 					.getDefaultType());

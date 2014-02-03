@@ -1,5 +1,7 @@
 package com.example.myapp;
 
+import com.example.myapp.sync.UpdateService;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -83,12 +85,4 @@ public class FirstListViewActivity extends Activity {
 		        PackageManager.DONT_KILL_APP);
 	}
 	
-	private void disableReciever(){
-		ComponentName receiver = new ComponentName(this, SampleBootReceiver.class);
-		PackageManager pm = getPackageManager();
-
-		pm.setComponentEnabledSetting(receiver,
-		        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-		        PackageManager.DONT_KILL_APP);
-	}
 }

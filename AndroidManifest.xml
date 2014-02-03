@@ -9,6 +9,8 @@
         android:targetSdkVersion="18" />
     
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -38,13 +40,13 @@
         </activity>
         
         <provider
-            android:name=".ContactProvider"
-            android:authorities="com.example.myapp.ContactProvider"
+            android:name="com.example.myapp.db.DbContentProvider"
+            android:authorities="com.example.myapp.DbContentProvider"
             android:exported="false">
         </provider>
         
         <service
-            android:name=".UpdateService"
+            android:name="com.example.myapp.sync.UpdateService"
             android:exported="false" >
         </service>
         
