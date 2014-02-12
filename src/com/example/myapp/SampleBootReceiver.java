@@ -1,6 +1,6 @@
 package com.example.myapp;
 
-import com.example.myapp.sync.UpdateService;
+import com.example.myapp.update.UpdateService;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

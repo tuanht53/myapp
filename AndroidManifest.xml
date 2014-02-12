@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name=".FirstListViewActivity"
+            android:name="com.example.myapp.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,25 +28,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.example.myapp.ui.RevisionsActivity"
             android:label="@string/app_name" >
             
         </activity>
-        
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.myapp.ui.CitiesActivity"
+            android:label="@string/app_name" >
+            
+        </activity>
+        <activity
+            android:name="com.example.myapp.ui.OfficesActivity"
+            android:label="@string/app_name" >
+            
+        </activity>
+        <activity
+            android:name="com.example.myapp.ui.SettingsActivity"
             android:label="@string/app_name" >
             
         </activity>
         
         <provider
-            android:name="com.example.myapp.db.DbContentProvider"
+            android:name="com.example.myapp.data.DbContentProvider"
             android:authorities="com.example.myapp.DbContentProvider"
             android:exported="false">
         </provider>
         
         <service
-            android:name="com.example.myapp.sync.UpdateService"
+            android:name="com.example.myapp.update.UpdateService"
             android:exported="false" >
         </service>
         

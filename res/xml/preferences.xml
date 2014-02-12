@@ -6,7 +6,7 @@
         android:title="Синхронизация" >
         <SwitchPreference
             android:title="Автообновление"
-            android:key="pref_auto_update"
+            android:key="@string/pref_auto_update"
             android:defaultValue="true"
             android:summaryOff="нет"
             android:summaryOn="да" />
@@ -16,11 +16,11 @@
         android:key="country">
         <ListPreference
             android:title="Страна"
-            android:key="pref_country_list"
+            android:key="@string/pref_country_list"
             android:defaultValue="ru"
             android:entries="@array/entries"
             android:entryValues="@array/entry_values"
-            android:summary="Россия" />
+            android:summary="Не выбрана" />
     </PreferenceCategory>
 
 </PreferenceScreen>
