@@ -17,10 +17,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         mContentResolver = context.getContentResolver();
     }
 	
+	public SyncAdapter(Context context, boolean autoInitialize,
+			boolean allowParallelSyncs) {
+		super(context, autoInitialize, allowParallelSyncs);
+		mContentResolver = context.getContentResolver();
+	}
+	
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority,
 			ContentProviderClient provider, SyncResult syncResult) {
-		// TODO Auto-generated method stub
 		
 	}
 
