@@ -1,4 +1,4 @@
-package com.example.myapp.sync;
+ package com.example.myapp.sync;
 
 import android.app.Service;
 import android.content.Intent;

@@ -58,6 +58,9 @@ public class MainActivity extends Activity {
 				} else if (tv.getText().toString().equals("Настройки")) {
 					intent = new Intent(MainActivity.this,
 							SettingsActivity.class);
+				} else if (tv.getText().toString().equals("SyncAdapter")) {
+					intent = new Intent(MainActivity.this,
+							SyncActivity.class);
 				} else
 					intent = new Intent(MainActivity.this,
 							RevisionsActivity.class);
